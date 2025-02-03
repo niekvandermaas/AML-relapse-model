@@ -22,7 +22,7 @@ complete_data <- dev_dat
 ##########################################
 
 # predictors in final model: ~age + rfi + cytogenetics(inv(16), t(16;16), t(8;21)) + allo and auto SCT
-dat_breems <- complete_data %>% select(pid, trialnr, inv16, t8_21, sct_au, sct_allo, time, event, efs_rel, efsi_rel, rfs2, rfsi2, ttcr2, ttcri2) %>% mutate(
+dat_breems <- complete_data %>% select(pid, trialnr, inv16, t8_21, sct_au, sct_allo, time, event) %>% mutate(
   cyto = case_when(
     inv16 == 1 ~ 1,
     t8_21 == 1 ~ 1,
@@ -90,12 +90,12 @@ timeROC(dat_breems$time, dat_breems$event,
 # predictors in final model: ~ rfi + FLT3-ITD + cyto
 dat_GOELAMS <- rel_data %>% 
   select(pid, trialnr, flt3itd, t8_21, t15_17, inv16, del5q, m5, m7, ck,
-         starts_with("abn3"), abn03_q27, time, event, efs_rel, efsi_rel, rfs2, rfsi2, ttcr2, ttcri2) %>%
+         starts_with("abn3"), abn03_q27, time, event) %>%
   mutate(
     rfi = complete_data$rfi,
     cyto = case_when(
       t8_21 == 1 | t15_17 == 1 | inv16 == 1 ~ "Favorable/intermediate",
-      m5 == 1 | m7 == 1 | del5q == 1 | abn3q26 == 1 | ck2017 == 1 |
+      m5 == 1 | m7 == 1 | del5q == 1 | abn3q26 == 1 | ck == 1 |
         abn3_invq21q26 == 1 | abn3_q25 == 1 | abn3_q21q26 == 1 | 
         abn03_q27 == 1 ~ "Adverse", 
       t8_21 == 0 & t15_17 == 0 & inv16 == 0 &  
