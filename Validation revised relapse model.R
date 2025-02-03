@@ -4,10 +4,9 @@ library(survminer)
 library(tidyverse)
 library(caret)
 library(timeROC)
-library(riskRegression)
 
 #load data
-test_data <- readxl::read_xlsx("xlsx files/UK-AML18.xlsx") %>% mutate(across(c(25, 27:77, 130:155), as.factor))
+test_data 
 
 #select patients in cr and relapse. Remove certain IDs with other treatments
 test_data <- test_data %>%
