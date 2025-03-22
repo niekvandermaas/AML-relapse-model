@@ -61,7 +61,7 @@ ggsurvplot(
 )
 
 #survival at 1 year
-summary(survfit(Surv(os_rel, osi_rel) ~ risk, test), times = 42)
+summary(survfit(Surv(os_rel, osi_rel) ~ risk, test), times = 12)
 
 # Calculate c-index at 1 year
 (c_r <- timeROC(T=test$os_rel, 
